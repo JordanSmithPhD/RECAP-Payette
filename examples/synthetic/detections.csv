@@ -1,0 +1,13 @@
+detection_id,image_id,class_name,confidence,x_min,y_min,x_max,y_max
+det_001,parking_001,vehicle,0.91,100,100,220,190
+det_002,parking_002,vehicle,0.94,104,102,224,192
+det_003,parking_003,vehicle,0.88,310,120,430,210
+det_004,parking_004,vehicle,0.92,313,122,433,212
+det_009,parking_003,vehicle,0.86,500,140,620,230
+det_010,parking_004,vehicle,0.90,503,142,623,232
+det_005,river_001,watercraft,0.73,410,220,520,280
+det_006,river_002,watercraft,0.79,414,222,524,282
+det_007,river_003,watercraft,0.68,250,240,360,300
+det_008,river_004,watercraft,0.76,253,242,363,302
+det_011,river_003,watercraft,0.70,430,260,540,320
+det_012,river_004,watercraft,0.74,433,262,543,322

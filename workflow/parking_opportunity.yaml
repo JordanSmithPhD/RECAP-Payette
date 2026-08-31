@@ -1,0 +1,78 @@
+schema_version: 1
+name: parking-opportunity
+supported_output: mapped surface area by class and reach
+
+contracts:
+  recommended:
+    bands: [R, G, B, N]
+    slope_comparison: "<= 5 percent"
+    chip_selection: spatially grouped positives and sampled negatives
+    partitions: [train, validation, test]
+    reach_assignment: boundary_clip
+  historical_replay:
+    bands: [R, G, B, alpha]
+    slope_comparison: "< 5 percent"
+    normalization: unit-scaled RGB divided by 255 a second time
+    chip_selection: 561 foreground-containing chips
+    evaluation: training-set resubstitution
+    status: conditional_on_private_frozen_inputs
+
+classes:
+  0: background
+  1: paved_parking
+  2: dirt_gravel_parking
+  3: roof
+  4: water
+  5: road
+
+parameters:
+  road_buffer_m: 500
+  river_buffer_m: 500
+  metric_crs: EPSG:32611
+  storage_crs: EPSG:4326
+  slope_threshold_percent: 5
+  imagery_collection: USDA/NAIP/DOQQ
+  imagery_start_date: "2022-01-01"
+  imagery_end_date_exclusive: "2025-12-31"
+  imagery_mosaic_recommended: latest_valid_pixel
+  dem_source: USGS_3DEP_dynamic_service
+  dem_request_resolution_m: 1
+  sam_model: vit_h
+  sam_checkpoint: sam_vit_h_4b8939.pth
+  sam_tile_pixels: 1024
+  sam_points_per_side: 32
+  sam_pred_iou_threshold: 0.86
+  sam_stability_threshold: 0.92
+  sam_crop_layers: 0
+  sam_min_region_pixels: 100
+  chip_pixels: 512
+  spatial_group_pixels: 4096
+  split_seed: 20260824
+  split_fractions: {train: 0.70, validation: 0.15, test: 0.15}
+  architecture: DeepLabV3Plus
+  encoder: resnet34
+  epochs: 15
+  batch_size: 8
+  optimizer: Adam
+  learning_rate: 0.0001
+  class_weights: [1, 50, 50, 10, 10, 10]
+
+stages:
+  - ["01a", pipeline/01_export_naip_earth_engine.py]
+  - ["01b", pipeline/01_finalize_naip_export.py]
+  - ["01c", pipeline/01_mosaic_naip_exports.py]
+  - ["01d", pipeline/01_build_corridor.py]
+  - ["01e", pipeline/01_build_dem_slope.py]
+  - ["02a", pipeline/02_generate_sam_candidates.py]
+  - ["02b", manual_GIS_review_with_lineage]
+  - ["02c", pipeline/02_validate_candidate_labels.py]
+  - ["03", pipeline/03_build_segmentation_dataset.py]
+  - ["04a", pipeline/04_train_segmentation.py]
+  - ["04b", pipeline/04_evaluate_segmentation.py]
+  - ["05a", pipeline/05_infer_segmentation.py]
+  - ["05b", pipeline/05_summarize_parking_capacity.py]
+
+interpretation_limits:
+  - not_legal_parking
+  - not_stall_geometry
+  - not_operational_capacity_without_a_documented_external_standard

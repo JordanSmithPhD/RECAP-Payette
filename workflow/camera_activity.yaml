@@ -1,0 +1,52 @@
+schema_version: 1
+name: camera-relative-activity
+supported_outputs:
+  parking: detection-conditioned distinct vehicle tracks per monitored site-hour
+  river: detection-conditioned distinct watercraft tracks per monitored site-hour
+
+classes:
+  0: vehicle
+  1: watercraft
+
+historical_operational_settings:
+  architecture: YOLO26n
+  image_size_pixels: 960
+  vehicle_confidence: 0.25
+  watercraft_confidence: 0.477
+  nms_iou: 0.70
+  tracking_iou: 0.50
+  max_interval_seconds_for_dwell_sum: 900
+  track_expiration: none
+  zero_detection_hours: omitted
+  exact_training_replay: unavailable
+  replay_boundary: frozen_daylight_manifest_plus_private_checkpoint
+
+recommended_settings:
+  content_hash_grouped_partitions: [train, validation, test]
+  track_expiration_seconds: 900
+  zero_detection_hours: retained_when_at_least_one_image_is_readable
+  no_readable_image_hours: missing_not_zero
+  coverage_fields: [manifest_images, images_acquired, images_readable]
+
+stages:
+  - ["06", pipeline/06_build_camera_manifest.py]
+  - ["07a", human_annotation_in_FiftyOne]
+  - ["07b", pipeline/08_assign_detection_splits.py]
+  - ["07c", pipeline/07_export_yolo.py]
+  - ["08a", pipeline/08_validate_yolo_dataset.py]
+  - ["08b", pipeline/08_train_detector.py]
+  - ["08c", pipeline/08_tune_thresholds.py]
+  - ["08d_optional_provisional_inference", pipeline/09_run_camera_inference.py]
+  - ["08e_optional", pipeline/08_select_annotation_batch.py]
+  - ["08f_optional", human_review_and_freeze_new_annotation_round]
+  - ["09a", pipeline/09_run_camera_inference.py]
+  - ["09b", pipeline/09_normalize_camera_outputs.py]
+  - ["10a", pipeline/10_summarize_camera_activity.py]
+  - ["10b", pipeline/10_calibrate_activity.py]
+
+interpretation_limits:
+  - not_percent_occupancy
+  - not_absolute_visitation
+  - not_corridor_throughput
+  - not_a_management_threshold
+  - annotation_stages_do_not_establish_a_causal_active_learning_effect

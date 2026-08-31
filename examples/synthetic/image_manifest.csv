@@ -1,0 +1,9 @@
+image_id,site_id,captured_at,acquired,readable,path
+parking_001,parking_demo,2025-07-01T12:00:00Z,true,true,Parking/parking_demo/20250701_120000.jpg
+parking_002,parking_demo,2025-07-01T12:05:00Z,true,true,Parking/parking_demo/20250701_120500.jpg
+parking_003,parking_demo,2025-07-01T13:00:00Z,true,true,Parking/parking_demo/20250701_130000.jpg
+parking_004,parking_demo,2025-07-01T13:05:00Z,true,true,Parking/parking_demo/20250701_130500.jpg
+river_001,river_demo,2025-07-01T12:02:00Z,true,true,River/river_demo/20250701_120200.jpg
+river_002,river_demo,2025-07-01T12:07:00Z,true,true,River/river_demo/20250701_120700.jpg
+river_003,river_demo,2025-07-01T13:02:00Z,true,true,River/river_demo/20250701_130200.jpg
+river_004,river_demo,2025-07-01T13:07:00Z,true,true,River/river_demo/20250701_130700.jpg
