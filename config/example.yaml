@@ -1,0 +1,10 @@
+# Copy this file to ../config.yaml only when local path overrides are needed.
+# config.yaml is ignored by Git. Relative paths resolve from the repository root.
+paths:
+  data_root: data
+  output_root: outputs
+  camera_root: data/external_camera_archive
+  training_root: data/external_training
+
+parking:
+  run_id: recommended_v1

@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use these workflows, please cite this software and the associated article."
+title: "RECAP-Payette: Computer-vision workflows for linear recreation corridors"
+type: software
+authors:
+  - family-names: "Smith"
+    given-names: "Jordan W."
+repository-code: "https://github.com/JordanSmithPhD/RECAP-Payette"
+url: "https://extension.usu.edu/iort/recap-platform/"
+abstract: >-
+  Data-free, reproducible workflows for mapping parking opportunity from aerial
+  imagery and deriving relative parking-area and on-river activity indices from
+  fixed-camera object detections.
+keywords:
+  - recreation management
+  - computer vision
+  - semantic segmentation
+  - object detection
+  - remote sensing
+  - active learning
+license: "AGPL-3.0-only"
+version: "1.0.0"
+date-released: "2026-08-30"
+preferred-citation:
+  type: article
+  title: "Computer Vision Workflows For Physical Carrying Capacity Analysis and Monitoring in Linear Recreation Corridors"
+  authors:
+    - family-names: "Smith"
+      given-names: "Jordan W."
+    - family-names: "Lamborn"
+      given-names: "Chase C."
+  year: 2026

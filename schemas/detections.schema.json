@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JordanSmithPhD/RECAP-Payette/schemas/detections.schema.json",
+  "title": "RECAP long-form detection row",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "detection_id", "image_id", "class_name", "confidence",
+    "x_min", "y_min", "x_max", "y_max"
+  ],
+  "properties": {
+    "detection_id": {"type": "string", "minLength": 1},
+    "image_id": {"type": "string", "minLength": 1},
+    "class_name": {"enum": ["vehicle", "watercraft"]},
+    "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+    "x_min": {"type": "number"},
+    "y_min": {"type": "number"},
+    "x_max": {"type": "number"},
+    "y_max": {"type": "number"}
+  }
+}

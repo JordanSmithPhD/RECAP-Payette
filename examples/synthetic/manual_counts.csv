@@ -1,0 +1,5 @@
+site_id,class_name,hour_start,manual_reference_value
+parking_demo,vehicle,2025-07-01T12:00:00Z,1
+parking_demo,vehicle,2025-07-01T13:00:00Z,2
+river_demo,watercraft,2025-07-01T12:00:00Z,1
+river_demo,watercraft,2025-07-01T13:00:00Z,2

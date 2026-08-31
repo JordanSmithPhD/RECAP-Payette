@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JordanSmithPhD/RECAP-Payette/schemas/image_manifest.schema.json",
+  "title": "RECAP camera image manifest row",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["image_id", "site_id", "captured_at", "acquired", "readable"],
+  "properties": {
+    "image_id": {"type": "string", "minLength": 1},
+    "site_id": {"type": "string", "minLength": 1},
+    "captured_at": {"type": "string", "format": "date-time"},
+    "acquired": {"type": "boolean"},
+    "readable": {"type": "boolean"},
+    "path": {
+      "type": "string",
+      "description": "Path relative to the user-configured camera archive; never a public archive location."
+    },
+    "content_sha256": {"type": ["string", "null"], "pattern": "^[0-9a-f]{64}$"},
+    "file_size": {"type": "integer", "minimum": 0}
+  }
+}

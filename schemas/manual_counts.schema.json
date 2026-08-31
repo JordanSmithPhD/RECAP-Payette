@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/JordanSmithPhD/RECAP-Payette/schemas/manual_counts.schema.json",
+  "title": "Independent manual reference row",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["site_id", "class_name", "hour_start", "manual_reference_value"],
+  "properties": {
+    "site_id": {"type": "string", "minLength": 1},
+    "class_name": {"enum": ["vehicle", "watercraft"]},
+    "hour_start": {"type": "string", "format": "date-time"},
+    "manual_reference_value": {"type": "number", "minimum": 0}
+  }
+}

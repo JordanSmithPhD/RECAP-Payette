@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "recap-payette"
+version = "1.0.0"
+description = "Reproducible parking-opportunity and camera-activity workflows for linear recreation corridors"
+readme = "README.md"
+requires-python = ">=3.11,<3.13"
+license = "AGPL-3.0-only"
+authors = [{name = "Jordan W. Smith"}]
+keywords = ["recreation", "computer vision", "segmentation", "object detection", "remote sensing"]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "License :: OSI Approved :: GNU Affero General Public License v3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: GIS",
+  "Topic :: Scientific/Engineering :: Image Recognition",
+]
+dependencies = [
+  "numpy>=2.0,<3",
+  "pandas>=2.2,<4",
+  "Pillow>=11,<13",
+  "PyYAML>=6,<7",
+]
+
+[project.optional-dependencies]
+tables = ["pyarrow>=18,<24"]
+dev = ["pytest>=8,<10", "ruff>=0.11,<0.16"]
+
+[project.urls]
+Homepage = "https://github.com/JordanSmithPhD/RECAP-Payette"
+Repository = "https://github.com/JordanSmithPhD/RECAP-Payette"
+Issues = "https://github.com/JordanSmithPhD/RECAP-Payette/issues"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]
+pythonpath = [".", "src"]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 120
+extend-exclude = ["data", "outputs"]
+
+[tool.ruff.lint]
+select = ["E9", "F63", "F7", "F82"]

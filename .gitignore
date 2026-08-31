@@ -1,0 +1,40 @@
+# Local configuration and credentials
+config.yaml
+.env
+.env.*
+!.env.example
+credentials.json
+token.json
+
+# Primary/restricted data and generated artifacts
+data/
+outputs/
+models/
+runs/
+*.pt
+*.pth
+*.onnx
+*.tif
+*.tiff
+*.gpkg
+*.parquet
+
+# Python and notebook state
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.ipynb_checkpoints/
+.venv/
+.venv-*/
+
+# Editors and operating systems
+.DS_Store
+._*
+.idea/
+.vscode/
+
+# Earth Engine and cloud-local state
+.config/earthengine/
+*.log
