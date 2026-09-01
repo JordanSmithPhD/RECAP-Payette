@@ -1,5 +1,9 @@
 # RECAP-Payette
 
+<p align="center">
+  <img src="images/recap-payette-banner.png" width="100%" alt="RECAP Payette River Application banner showing detected watercraft and segmented roadway and dirt parking areas">
+</p>
+
 Reproducible, code-only workflows for deriving management-facing indicators in linear recreation corridors. This repository accompanies the Payette River computer-vision study and is part of the [RECAP platform](https://extension.usu.edu/iort/recap-platform/).
 
 The repository contains three related workflows:
